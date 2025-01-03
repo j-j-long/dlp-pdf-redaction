@@ -1,6 +1,8 @@
 # Solution Guide
 This solution provides an automated, serverless way to redact sensitive data from PDF files using Google Cloud Services like [Data Loss Prevention (DLP)](https://cloud.google.com/dlp), [Cloud Workflows](https://cloud.google.com/workflows), and [Cloud Run](https://cloud.google.com/run).
 
+## DSAR Config
+Custom config of the dlp api to meet the needs of the DSAR are supplied to redact some but not all pii.
 
 ## Solution Architecture Diagram
 The image below describes the solution architecture of the pdf redaction process.
@@ -54,7 +56,7 @@ You will first need to build the docker images for each microservice.
 ```
 PROJECT_ID=[YOUR_PROJECT_ID]
 PROJECT_NUMBER=$(gcloud projects list --filter="PROJECT_ID=$PROJECT_ID" --format="value(PROJECT_NUMBER)")
-REGION=us-central1
+REGION=europe-west2
 DOCKER_REPO_NAME=pdf-redaction-docker-repo
 CLOUD_BUILD_SERVICE_ACCOUNT=cloudbuild-sa
 
@@ -122,7 +124,7 @@ terraform -chdir=terraform apply -auto-approve
 ### 5. Take note of Terraform Outputs
 
 Once terraform finishes provisioning all resources, you will see its outputs. Please take note of `input_bucket` and `output_bucket` buckets. Files uploaded to the `input_bucket` bucket will be automatically processed and the redacted files will be written to the `output_bucket` bucket.
-If you missed the outputs from the firs run, you can list the outputs by running
+If you missed the outputs from the first run, you can list the outputs by running
 
 ```
 terraform -chdir=terraform output

@@ -23,10 +23,10 @@ variable "docker_repo_name" {
 variable "region" {
   type        = string
   description = "GCP Region"
-  default     = "us-central1"
+  default     = "europe-west2"
 }
 variable "wf_region" {
   type        = string
   description = "Cloud Workflows Region (choose a supported region: https://cloud.google.com/workflows/docs/locations)"
-  default     = "us-central1"
+  default     = "europe-west2"
 }
